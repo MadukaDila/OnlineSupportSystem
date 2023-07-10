@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\SupportAgentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MyTicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,10 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::get('/', function () {
-    return view('support');
-});
+
+Route::get('/', [MyTicketController::class, 'index'])->name('myticket.index');
+Route::get('/myticket', [MyTicketController::class, 'view'])->name('myticket.view');
+Route::get('/myticket/search', [MyTicketController::class, 'search'])->name('myticket.search');  
 Route::post('/', [TicketController::class, 'create'])->name('tickets.create');
 
 Route::post('/register', [SupportAgentController::class, 'register']);

@@ -9,8 +9,11 @@
 <body>
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="{{ url('/') }}">
             Online Support System
+          </a>
+          <a class="navbar-brand" href="{{ url('/myticket') }}">
+            My Ticket
           </a>
         </div>
       </nav>
