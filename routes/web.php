@@ -31,15 +31,15 @@ Route::post('/logout', [SupportAgentController::class, 'logout'])->name('logout'
 // Protected Routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    // Define other protected routes here
+    Route::get('/dashboard', [DashboardController::class, 'show'])->name('dashboard.show');
+    
+    Route::get('/supportreply/{id}', [TicketController::class, 'show'])->name('tickets.show');
 });
 // Create a support ticket
 
 // List all support tickets
-Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index');
 
 // View a support ticket
-Route::get('/tickets/{id}', [TicketController::class, 'show'])->name('tickets.show');
 
 // Reply to a support ticket
 Route::post('/tickets/{id}/reply', [TicketController::class, 'reply'])->name('tickets.reply');
