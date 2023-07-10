@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\SupportAgentController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +19,21 @@ use App\Http\Controllers\TicketController;
 Route::get('/', function () {
     return view('support');
 });
-
-
-// Create a support ticket
 Route::post('/', [TicketController::class, 'create'])->name('tickets.create');
+
+Route::post('/register', [SupportAgentController::class, 'register']);
+
+// Authentication Routes
+Route::get('/login', [SupportAgentController::class, 'index'])->name('login');
+Route::post('/login', [SupportAgentController::class, 'login']);
+Route::post('/logout', [SupportAgentController::class, 'logout'])->name('logout');
+
+// Protected Routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Define other protected routes here
+});
+// Create a support ticket
 
 // List all support tickets
 Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index');
@@ -30,3 +43,6 @@ Route::get('/tickets/{id}', [TicketController::class, 'show'])->name('tickets.sh
 
 // Reply to a support ticket
 Route::post('/tickets/{id}/reply', [TicketController::class, 'reply'])->name('tickets.reply');
+
+
+
