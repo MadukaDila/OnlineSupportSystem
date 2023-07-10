@@ -34,15 +34,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'show'])->name('dashboard.show');
     
     Route::get('/supportreply/{id}', [TicketController::class, 'show'])->name('tickets.show');
+    Route::post('/tickets/{id}/reply', [TicketController::class, 'reply'])->name('tickets.reply');
 });
-// Create a support ticket
 
-// List all support tickets
-
-// View a support ticket
-
-// Reply to a support ticket
-Route::post('/tickets/{id}/reply', [TicketController::class, 'reply'])->name('tickets.reply');
 
 
 

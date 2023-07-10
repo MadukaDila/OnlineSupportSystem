@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ticket;
+use App\Models\ProblemReply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TicketCreated;
+use App\Mail\ReplyNotification;
 
 
 class TicketController extends Controller
@@ -56,16 +58,42 @@ class TicketController extends Controller
     public function show($id)
     {
         $ticket = Ticket::findOrFail($id);
-
+        $ticketUpdate = Ticket::findOrFail($id); // Replace $ticketId with the ID of the ticket you want to update        
+        $ticketUpdate->is_open = '1';
+        $ticketUpdate->save();
         return view('tickets.show', compact('ticket'));
     }
 
     public function reply(Request $request, $id)
     {
         // Validate the incoming request data
+        $request->validate([
+            'description' => 'required',
+        ]);
 
+        $email = $request->input('email');
         // Retrieve the ticket by ID
+        $ticket = ProblemReply::create([
+            'ticket_id' => $request->input('ticket_id'),
+            'reply' => $request->input('description'),
+        ]);
 
+        $ticketUpdate = Ticket::findOrFail($id); // Replace $ticketId with the ID of the ticket you want to update        
+        $ticketUpdate->status = 'Closed';
+        $ticketUpdate->save();
+
+        $responseData = [
+            'ticketId' => $ticket->id,
+            'message' => 'Reply Successfully',
+        ];
+    
+        $data = [
+            'ticketId' => $ticketUpdate->reference_number,
+            'reply' => $ticket->reply,
+        ];
+
+        Mail::to($email)->send(new ReplyNotification($data));
+        return response()->json($responseData);
         // Add a reply to the ticket
 
         // Send email notification to the customer
