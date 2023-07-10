@@ -16,6 +16,9 @@
     .page-link {
         color: #003366 !important;
     }
+    .row-highlight {
+        background-color: #94a1ad;
+    }
 </style>
 @section('content')
     <h1>Support Tickets</h1>
@@ -37,7 +40,10 @@
                 $count = ($tickets->currentPage() - 1) * $tickets->perPage() + 1;
             @endphp
             @foreach ($tickets as $ticket)
-                <tr>
+                @php
+                    $rowClass = $ticket->is_open == 0 ? 'row-highlight' : '';
+                @endphp
+                <tr class="{{ $rowClass }}">
                     <th scope="row">{{ $count }}</th>
                     <td>{{ $ticket->customer_name }}</td>
                     <td>{{ $ticket->email }}</td>
@@ -68,4 +74,12 @@
         var url = '/supportreply/' + ticketId;
         window.location.href = url;
     }
+
+    // Refresh the dashboard page upon returning
+    window.onpageshow = function(event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    };
 </script>
+

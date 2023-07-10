@@ -16,6 +16,7 @@ class CreateTicketsTable extends Migration
             $table->string('phone_number');
             $table->string('reference_number')->unique();
             $table->string('status')->default('Open');
+            $table->string('is_open')->default('0');
             $table->timestamps();
         });
     }
