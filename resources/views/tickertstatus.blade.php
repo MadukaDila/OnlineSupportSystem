@@ -15,11 +15,11 @@
         </form>
         <div id="resultContainer" style="display: none;">
             <div class="form-group py-2">
-                <label for="ticketId">Send Problem</label>
+                <label for="ticketId">My Issue</label>
                 <textarea type="text" class="form-control" id="description" name="description" readonly></textarea>
             </div>
             <div class="form-group py-2">
-                <label for="description">Reply Problem</label>
+                <label for="description">Support Agent Reply</label>
                 <textarea type="text" class="form-control" id="replydescription" name="replydescription" readonly></textarea>
             </div>
         </div>
@@ -38,17 +38,19 @@
 
             $.ajax({
                 url: '{{ route("myticket.search") }}', // Replace with your Laravel route URL
-                type: 'get',
+                type: 'GET',
                 data: formData,
                 success: function(response) {
-                    console.log(response);
+                    //console.log(response);
                     if (response.success) {
                         // Show the result container and populate the textarea values
+                        alert(response.message);
                         $('#resultContainer').show();
                         $('#description').val(response.data.description);
                         $('#replydescription').val(response.data.replydescription);
                     } else {
                         alert(response.message);
+                        $('#resultContainer').hide();
                     }
                 },
                 error: function(xhr) {
