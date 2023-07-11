@@ -6,37 +6,84 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
-        .center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+       
     </style>
 </head>
 <body>
-    
-    <div class="center">
-        <form id="loginForm" class="w-25 border border-primary rounded p-4"  style="background-color: #003366;" >
-        @csrf
-        <h1 class="text-white">Login</h1>
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-      
-        <div class="form-outline mb-4">
-          <input type="text" id="form2Example1" class="form-control form-control-sm" name="username" required>
-          <label class="form-label text-white" for="form2Example1">Email address</label>
-        </div>
-      
-        <div class="form-outline mb-4">
-          <input type="password" id="form2Example2" class="form-control form-control-sm" name="password" required>
-          <label class="text-white form-label" for="form2Example2">Password</label>
-        </div>
-      
-        <button type="submit" class="btn btn-primary btn-block mb-4" style="background-color: #003366;">Sign in</button>
-      </form>
-      
-    </div>
 
+  <section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100" >
+      <div class="row d-flex justify-content-center align-items-center h-100" >
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card text-white" style="border-radius: 1rem; background-color: #003366;">
+            <div class="card-body p-5 text-center">
+  
+              <div class="mb-md-5 mt-md-4 pb-5">
+  
+                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                <p class="text-white-50 mb-5">Please enter your login and password!</p>
+                <form id="loginForm">
+                  @csrf
+                <div class="form-outline form-white mb-4">
+                  <input type="text" id="username" name="username" class="form-control form-control-lg" />
+                  <label class="form-label" for="typeEmailX">Email</label>
+                </div>
+  
+                <div class="form-outline form-white mb-4">
+                  <input type="password" id="password" name="password" class="form-control form-control-lg" />
+                  <label class="form-label" for="typePasswordX">Password</label>
+                </div>
+  
+                <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                </form>
+  
+              </div>
+
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  {{-- <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card w-auto">
+        <div class="card-header">
+            LogIn
+        </div>
+        <div class="card-body">
+            <form id="loginForm">
+                @csrf
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="form-group row py-2">
+                    <label for="email_address" class="col-md-4 col-form-label text-md-right">User Name</label>
+                    <div class="col-md-8">
+                        <input type="text" id="username" class="form-control" name="username" required autofocus>
+                    </div>
+                </div>
+
+                <div class="form-group row py-2">
+                    <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                    <div class="col-md-8">
+                        <input type="password" id="password" class="form-control" name="password" required>
+                    </div>
+                </div>
+
+                <div class="form-group row py-2">
+                    <div class="col-md-8 offset-md-4">
+                        <button type="submit" style="background-color: #003366;" class="btn btn-primary btn-block">
+                            Log In
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> --}}
 
 </body>
 </html>
