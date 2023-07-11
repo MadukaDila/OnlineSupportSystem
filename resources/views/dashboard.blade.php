@@ -22,6 +22,7 @@
 </style>
 @section('content')
     <h1>Support Tickets</h1>
+    <div>
     <table class="table">
         <thead>
             <tr>
@@ -64,6 +65,7 @@
 
     <div class="d-flex justify-content-center">
         {{ $tickets->links('pagination::bootstrap-4') }}
+    </div>
     </div>
 @endsection
 
