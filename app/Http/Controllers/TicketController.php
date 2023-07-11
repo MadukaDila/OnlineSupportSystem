@@ -94,10 +94,6 @@ class TicketController extends Controller
 
         Mail::to($email)->send(new ReplyNotification($data));
         return response()->json($responseData);
-        // Add a reply to the ticket
-
-        // Send email notification to the customer
-
-        // Redirect or return a response
+      
     }
 }
