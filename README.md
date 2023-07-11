@@ -10,7 +10,7 @@
 1."composer i" in the terminal.
 2."php artisan serve" in the terminal.
 
-This is a support agent login-<link>http://127.0.0.1:8000/login</li,nk>
+This is a support agent login-<link>http://127.0.0.1:8000/login</link>
 
 This projet sample ui located on the "Screenshot" folder.
 
